@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="{% static '/css/form.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <title>CRM | Login</title>
+    <style>
+      .errorlist{
+        color:tomato;}
+      #messages{
+        background-color:antiquewhite;
+        border-radius: 3px;
+        padding: 10px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-box">
+      <h2>Login</h2>
+      <form method="POST" id="login">
+        {% csrf_token %}
+        <div class="user-box">
+          <input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username">
+          <label>Username</label>
+        </div>
+        <div class="user-box">
+          <input type="password" name="password" autocomplete="new-password" required="" id="id_password1">
+          <label>Password</label>
+        </div>
+        <a id="submit" href="#">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Submit
+        </a>
+      </form>
+      {{form.errors}}
+      {% for message in messages %}
+        <p id="messages">{{message}}<p>
+      {% endfor %}
+      <p style="text-align:center ;color:white;">Don't have an account? <a href="{% url 'register' %}" style="text-decoration: none; color:aqua;">Register</a></p>
+    </div>
+    <script>
+      let form = document.getElementById('login');
+      let submit = document.getElementById('submit');
+      submit.onclick = function(){
+        form.submit();
+      }
+    </script>
+  </body>
+</html>
+
+<!-- --------------------------------- -->
+<!-- <h3>Login</h3>
+<form method="POST">
+  {% csrf_token %} {{form.username.label}} {{form.username}}
+  {{form.email.label}} {{form.email}} {{form.password1.label}}
+  {{form.password1}} {{form.password2.label}} {{form.password2}}
+  <input type="submit" value="Regist" />
+</form> -->

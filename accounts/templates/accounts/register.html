@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="{% static '/css/form.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <title>CRM | Register</title>
+    <style>
+      .errorlist{
+        color:tomato;}
+      label{
+        color: #FFF;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-box">
+      <h2>Register</h2>
+      <form method="POST" id="regist">
+        {% csrf_token %}
+        <div class="user-box">
+          {{form.username}}
+          <label>Username</label>
+        </div>
+        <div class="user-box">
+          {{form.email}}
+          <label>Email</label>
+        </div>
+        <div class="user-box">
+          {{form.password1}}
+          <label>Password</label>
+        </div>
+        <div class="user-box">
+          {{form.password2}}
+          <label>Confirm Password</label>
+        </div>
+        <label>User Group: </label>
+        <input type="radio" id='admin' name="group" value="admin" checked="checked">
+        <label for="admin">admin</label>
+        <input type="radio" id="customer" name="group" value="customer">
+        <label for="customer">customer</label>
+        <br>
+        <a id="submit" href="#">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Submit
+        </a>
+      </form>
+      {{form.errors}}
+      <p style="text-align:center;color:white;" >Already have an account? <a href="{% url 'login' %}" style="text-decoration: none; color:aqua;">Login</a></p>
+    </div>
+    <script>
+      let form = document.getElementById('regist');
+      let submit = document.getElementById('submit');
+      submit.onclick = function(){
+        form.submit();
+      }
+    </script>
+  </body>
+</html>
